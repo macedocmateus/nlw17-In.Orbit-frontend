@@ -6,8 +6,16 @@ import { Progress, ProgressIndicator } from './ui/progress-bar'
 import { Separator } from './ui/separator'
 import { OutlineButton } from './ui/outline-button'
 import { UndoGoal } from './undo-goal'
+import { getSummary } from '../http/get-summary'
+import { useQuery } from '@tanstack/react-query'
 
 export function Summary() {
+  const { data } = useQuery({
+    queryKey: ['summary'],
+    queryFn: getSummary,
+    staleTime: 1000 * 60, // 60 segundos
+  })
+
   return (
     <div className="py-10 max-w-[480px] px-5 mx-auto flex flex-col gap-6 h-full">
       <div className="flex items-center justify-between">
